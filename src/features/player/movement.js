@@ -17,6 +17,19 @@ export default function handleMovement(player) {
         }
     }
 
+    function getSpriteLocation(direction) {
+        switch(direction) {
+            case 'SOUTH':
+                return '0px 0px'
+            case 'EAST':
+                return '0px 40px'
+            case 'WEST':
+                return '0px 80px'
+            case 'NORTH':
+                return '0px 120px'
+        }
+    }
+
     function observeBoundaries(oldPos, newPos) {
         return (newPos[0] >= 0 && newPos[0] <= MAP_WIDTH - SPRITE_SIZE) && 
         (newPos[1] >= 0 && newPos[1] <= MAP_HEIGHT - SPRITE_SIZE)
@@ -30,12 +43,14 @@ export default function handleMovement(player) {
         return nextTile < 5
     }
 
-    function dispatchMove(newPos) {
+    function dispatchMove(direction, newPos) {
         
         store.dispatch({
             type: 'MOVE_PLAYER',
             payload: {
-                position: newPos
+                position: newPos,
+                direction,
+                spriteLocation: getSpriteLocation(direction)
             }
         })
     }
@@ -45,7 +60,7 @@ export default function handleMovement(player) {
         const newPos = getNewPosition(oldPos, direction)
 
         if(observeBoundaries(oldPos, newPos) && observeImpassable(oldPos, newPos))
-            dispatchMove(newPos)
+            dispatchMove(direction, newPos)
     }
 
     function handleKeyDown(e) {
