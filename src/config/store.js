@@ -9,3 +9,5 @@ const store = createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS__EXTENTION__ && Window.__REDUX_DEVTOOLS__EXTENTION__()
 )
+
+export default store;
