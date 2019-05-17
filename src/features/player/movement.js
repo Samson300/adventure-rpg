@@ -23,6 +23,10 @@ export default function handleMovement(player) {
         ? newPos : oldPos
     }
 
+    function observeImpassable(oldPos, newPos) {
+        return 
+    }
+
     function dispatchMove(direction) {
         const oldPos = store.getState().player.position
         store.dispatch({

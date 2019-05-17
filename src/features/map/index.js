@@ -1,5 +1,6 @@
 import React from 'react';
 import { SPRITE_SIZE } from '../../config/constants';
+import { connect } from 'react-redux';
 
 import './styles.css';
 
@@ -22,7 +23,7 @@ function MapTile(props) {
         width: SPRITE_SIZE
     }}
     >
-    {props.tile}
+        {/* {props.tile} */}
     </div>
 }
 
@@ -50,9 +51,14 @@ function Map(props) {
         {
             props.tiles.map(row => <MapRow tiles={row} />)
         }
-
         </div>
     )
 }
 
-export default Map;
+function mapStateToProps(state) {
+    return {
+        tiles: state.map.tiles
+    }
+}
+
+export default connect(mapStateToProps)(Map);
